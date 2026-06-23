@@ -39,6 +39,25 @@ void CambioMoneda(const vector<int>& monedas, int cant_llegar) {
             }
         }
     }
+
+    // Ordenar la combinacion de mayor a menor
+    sort(combinacion.rbegin(), combinacion.rend());
+
+    cout << "Combinacion: ";
+    for (size_t i = 0; i < combinacion.size(); ++i) {
+        cout << combinacion[i];
+        if (i < combinacion.size() - 1) {
+            cout << " + ";
+        }
+    }
+    
+    // Imprimir la tabla de DP
+    cout << "\nTabla DP:" << endl;
+    for (int i = 0; i <= cant_llegar; ++i) {
+        int val = (dp[i] >= actual) ? -1 : dp[i];
+        cout << val;
+        if (i < cant_llegar) cout << ", ";
+    }
 }
 
 int main() {
