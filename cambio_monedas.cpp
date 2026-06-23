@@ -9,7 +9,16 @@ void CambioMoneda(const vector<int>& monedas, int cant_llegar) {
     vector<int> dp(cant_llegar + 1, actual);
     //dp[0] =0 0 monedas para hacer cantidad 0
     dp[0] = 0;
-    
+
+    // dp[i] representa el numero minimo de monedas necesarias para formar la cantidad i
+    for (int i = 1; i <= cant_llegar; ++i) {
+        for (int c : monedas) {
+            if (i - c >= 0) {
+                //relacion de recurrencia: dp[i] = min(dp[i], dp[i - c] + 1) para cada moneda c
+                dp[i] = min(dp[i], dp[i - c] + 1);
+            }
+        }
+    }
     //salir de la funcion si no es posible formar la cantidad deseada
     if (dp[cant_llegar] >= actual) return;
 }
