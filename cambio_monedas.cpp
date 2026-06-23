@@ -21,6 +21,24 @@ void CambioMoneda(const vector<int>& monedas, int cant_llegar) {
     }
     //salir de la funcion si no es posible formar la cantidad deseada
     if (dp[cant_llegar] >= actual) return;
+    
+
+    cout << "Cantidad minima de monedas: " << dp[cant_llegar] << endl;
+
+    // Reconstruccion de la combinacion de monedas utilizada
+    vector<int> combinacion;
+    int totalAhora = cant_llegar;
+    while (totalAhora > 0) {
+        // Iterar sobre las monedas para encontrar una que haya sido utilizada en la solucion optima
+        for (int c : monedas) {
+            // Verificar si la moneda c fue utilizada en la solucion optima
+            if (totalAhora - c >= 0 && dp[totalAhora] == dp[totalAhora - c] + 1) {
+                combinacion.push_back(c);
+                totalAhora -= c;
+                break;
+            }
+        }
+    }
 }
 
 int main() {
